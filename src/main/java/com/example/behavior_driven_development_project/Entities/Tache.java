@@ -1,28 +1,24 @@
 package com.example.behavior_driven_development_project.Entities;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
-@Entity
-@Table(name = "TacheProjet")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(collection = "Tache")
 public class Tache implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTache;
+    private String idTache;  // MongoDB uses String for IDs by default
 
     private String description;
+
     private String User;
 
     private Date dateCreation;
@@ -31,13 +27,9 @@ public class Tache implements Serializable {
 
     private Date dateFinTache;
 
-    @Enumerated(EnumType.STRING)
     private RoleProjet tacheProjet;
 
-
-
-    @ManyToOne
-    @JoinColumn(name = "idProjet", referencedColumnName = "idProjet",
-            insertable = true, updatable = false)
+    // Reference back to the Projet document
+    @DBRef
     private Projet projet;
 }

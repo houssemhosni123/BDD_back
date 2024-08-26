@@ -1,6 +1,7 @@
 package com.example.behavior_driven_development_project.Controllers;
 
 import com.example.behavior_driven_development_project.Entities.Projet;
+import com.example.behavior_driven_development_project.Entities.RoleProjet;
 import com.example.behavior_driven_development_project.Entities.Tache;
 import com.example.behavior_driven_development_project.Services.TacheServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/Tache")
@@ -44,20 +47,22 @@ public class TacheController
 
 
     @PutMapping("/Updatetache/{id}")
-    Tache UpdateTache(@RequestBody Tache tache, @PathVariable("id") long idtache) {
+    Tache UpdateTache(@RequestBody Tache tache, @PathVariable("id") String idtache) {
         return Tservice.UpdateTache(tache,idtache);
     }
 
     @DeleteMapping("/Deletetache/{id}")
-    void DeleteIteration( @PathVariable("id") long idtache)
+    void DeleteIteration( @PathVariable("id") String idtache)
     {
         Tservice.DeleteTache(idtache);
 
     }
 
     @GetMapping("/GetTache/{idTache}")
-    Tache getTacheById(@PathVariable Long idTache) {
+    Tache getTacheById(@PathVariable String idTache) {
         return Tservice.getTachesById(idTache);
     }
+
+
 
 }

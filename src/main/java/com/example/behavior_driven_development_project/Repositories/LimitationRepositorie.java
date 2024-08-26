@@ -7,5 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 
-public interface LimitationRepositorie extends JpaRepository<Limitation,String> {
+public interface LimitationRepositorie extends MongoRepository<Limitation,String> {
 }

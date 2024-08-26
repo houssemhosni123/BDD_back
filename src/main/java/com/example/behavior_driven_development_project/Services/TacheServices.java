@@ -1,6 +1,7 @@
 package com.example.behavior_driven_development_project.Services;
 
 import com.example.behavior_driven_development_project.Entities.Projet;
+import com.example.behavior_driven_development_project.Entities.RoleProjet;
 import com.example.behavior_driven_development_project.Entities.Tache;
 import com.example.behavior_driven_development_project.Repositories.ItacheRepositorie;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
@@ -31,10 +33,12 @@ public class TacheServices  implements ItacheService {
     }
 
     @Override
-    public Tache UpdateTache(Tache tache, long idtache) {
+    public Tache UpdateTache(Tache tache, String idtache) {
         tache =TRepository.findTachesByIdTache(idtache);
         return TRepository.save(tache);
     }
+
+
 
     // Method to count tasks for each user
 
@@ -50,7 +54,7 @@ public class TacheServices  implements ItacheService {
 
 
     @Override
-    public void DeleteTache(long idtache) {
+    public void DeleteTache(String idtache) {
         // Attempt to find the task by ID
         Tache tache = TRepository.findTachesByIdTache(idtache);
 
@@ -73,7 +77,7 @@ public class TacheServices  implements ItacheService {
 
 
 
-    public Tache getTachesById(Long idTache) {
+    public Tache getTachesById(String idTache) {
         return TRepository.findById(idTache).orElse(null);
     }
 

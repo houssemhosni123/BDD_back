@@ -1,27 +1,23 @@
 package com.example.behavior_driven_development_project.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "Projet")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(collection = "Projet")
 public class Projet implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idProjet;
+    private String idProjet;  // MongoDB uses String for IDs by default
 
     private String Nom_Projet;
 
@@ -31,16 +27,16 @@ public class Projet implements Serializable {
 
     private String Description_Projet;
 
-    @Temporal(TemporalType.DATE)
     private Date DateDebut_Projet;
 
-    @Temporal(TemporalType.DATE)
     private Date DateFin_Projet;
 
-    @Enumerated(EnumType.STRING)
     private Status type;
-    @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
 
+    // Reference to the list of Tache documents
+    @DBRef
     @JsonIgnore
     private List<Tache> taches;
+
+    // Methods for statistics
 }

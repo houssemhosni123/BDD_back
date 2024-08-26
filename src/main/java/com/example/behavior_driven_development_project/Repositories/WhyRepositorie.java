@@ -7,5 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 
-public interface WhyRepositorie extends JpaRepository<Why,String> {
+public interface WhyRepositorie extends MongoRepository<Why,String> {
 }
